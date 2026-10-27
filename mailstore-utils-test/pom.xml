@@ -96,6 +96,15 @@
         <artifactId>project-build-plugin</artifactId>
         <extensions>true</extensions>
       </plugin>
+      <!-- Testcontainers 1.21.3 falls back to Docker API 1.32 when api.version is unset; Docker Engine 29 rejects it (minimum 1.40) due to ubuntu-latest 26.04 switch -->
+      <plugin>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <systemPropertyVariables>
+            <api.version>1.40</api.version>
+          </systemPropertyVariables>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
 </project>
